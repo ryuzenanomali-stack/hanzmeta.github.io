@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Keren Saya</title>
+    <style>
+        /* --- RESET & PENGATURAN DASAR --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0f0c29;
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            overflow: hidden;
+            color: white;
+        }
+
+        /* --- ANIMASI BACKGROUND (BOLA CAHAYA) --- */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .orb1 {
+            width: 300px;
+            height: 300px;
+            background: #ff00cc;
+            top: 10%;
+            left: 20%;
+        }
+
+        .orb2 {
+            width: 250px;
+            height: 250px;
+            background: #3333ff;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.2); }
+        }
+
+        /* --- KARTU GLASSMORPHISM --- */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: appear 1.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes appear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- TEKS & TIPOGRAFI --- */
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #d1d1d1;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* --- TOMBOL ANIMASI --- */
+        .btn {
+            position: relative;
+            display: inline-block;
+            padding: 12px 30px;
+            color: #fff;
+            background: #3a7bd5;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.3s;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #00d2ff;
+            transition: 0.4s ease;
+            z-index: -1;
+            border-radius: 50px;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px #00d2ff;
+            transform: translateY(-3px);
+        }
+
+        /* --- ANIMASI LOADING --- */
+        .loader {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00d2ff;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Orbs -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- Konten Utama -->
+    <div class="card">
+        <h1>Aplikasi Keren Saya</h1>
+        <p id="typing-text">Selamat datang di aplikasi masa depan.</p>
+        
+        <a href="#" class="btn" onclick="alert('Tombol berhasil diklik!')">Mulai Sekarang</a>
+
+        <!-- Animasi Loading -->
+        <div class="loader">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- Script untuk Efek Mengetik -->
+    <script>
+        const textElement = document.getElementById('typing-text');
+        const text = "Selamat datang di aplikasi masa depan. Dibuat dengan animasi modern dan desain elegan.";
+        let index = 0;
+
+        // Menghapus teks awal
+        textElement.innerHTML = '';
+
+        function typeText() {
+            if (index < text.length) {
+                textElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeText, 50); // Kecepatan mengetik (50ms)
+            }
+        }
+
+        // Mulai efek mengetik setelah 1 detik
+        setTimeout(typeText, 1000);
+    </script>
+</body>
+</html>
